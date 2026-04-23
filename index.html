@@ -21,7 +21,6 @@
       margin: 0; padding: 0; display: flex; height: 100vh; color: var(--text-main); overflow: hidden;
     }
 
-    /* Sidebar Styling */
     aside { width: 350px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; }
     .sidebar-header { background-color: var(--primary-color); color: white; padding: 20px; }
     .sidebar-header h1 { margin: 0 0 15px 0; font-size: 1.2rem; }
@@ -33,7 +32,6 @@
     .list-item-title { font-weight: bold; }
     .list-item-meta { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* Main Content Area Styling */
     main { flex-grow: 1; background-color: var(--main-bg); padding: 40px; overflow-y: auto; }
     .detail-view { max-width: 900px; }
     .detail-title { font-size: 2.2rem; color: var(--primary-color); margin: 5px 0 20px 0; }
@@ -50,7 +48,8 @@
     .rec-box.mod { border-left-color: #F9A825; }
     .rec-box.not-rec { border-left-color: #C62828; }
     
-    /* Documentation Chips & Tooltips */
+    .code-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block; }
+
     .code-chip { 
       background: #eee; padding: 6px 10px; border-radius: 4px; 
       font-family: monospace; cursor: pointer; margin-right: 8px; 
@@ -61,7 +60,7 @@
       content: attr(data-desc);
       position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
       background: #333; color: #fff; padding: 6px 12px; border-radius: 4px;
-      font-size: 0.75rem; white-space: normal; width: 180px; text-align: center; z-index: 10; font-family: sans-serif;
+      font-size: 0.75rem; white-space: normal; width: 220px; text-align: center; z-index: 10; font-family: sans-serif;
     }
 
     .edu-box { background: var(--edu-bg); padding: 20px; border-radius: 8px; margin-top: 30px; border: 1px solid #BBDEFB; }
@@ -88,364 +87,354 @@
       {
         condition: "Achilles Tendinopathy", bodyRegion: "Foot and Ankle", academy: "Orthopaedic",
         redFlags: ["Sudden gap in tendon", "Positive Thompson test", "Severe nocturnal pain"],
-        icd10: [
-            { code: "M76.61", desc: "Right Achilles Tendinitis" },
-            { code: "M76.62", desc: "Left Achilles Tendinitis" },
-            { code: "M76.60", desc: "Unspecified Achilles Tendinitis" }
-        ], 
+        icd10: [{ code: "M76.61", desc: "Right Achilles Tendinitis" }, { code: "M76.62", desc: "Left Achilles Tendinitis" }],
+        broadCodes: [{ code: "M25.57", desc: "Pain in Ankle/Foot" }, { code: "M62.81", desc: "Muscle Weakness" }, { code: "R26.2", desc: "Difficulty in Walking" }],
         outcomeMeasures: ["VISA-A", "LEFS", "FAAM"],
         highly: ["Heavy slow resistance", "Eccentric exercise"],
         moderately: ["Manual therapy", "Iontophoresis", "Taping"],
         notRec: ["Night splints"],
-        patientEdu: "This is a load-management issue. We use specific exercises to strengthen the tendon's ability to handle force."
+        patientEdu: "We use specific loading exercises to rebuild the tendon's strength gradually."
       },
       {
         condition: "Adhesive Capsulitis", bodyRegion: "Shoulder", academy: "Orthopaedic",
-        redFlags: ["Signs of malignancy", "CRPS", "Unexplained fever"],
-        icd10: [
-            { code: "M75.01", desc: "Adhesive Capsulitis Right Shoulder" },
-            { code: "M75.02", desc: "Adhesive Capsulitis Left Shoulder" }
-        ], 
+        redFlags: ["Signs of malignancy", "Unexplained fever"],
+        icd10: [{ code: "M75.01", desc: "Adhesive Capsulitis Right Shoulder" }, { code: "M75.02", desc: "Adhesive Capsulitis Left Shoulder" }],
+        broadCodes: [{ code: "M25.51", desc: "Pain in Shoulder" }, { code: "M75.9", desc: "Shoulder Lesion, Unspecified" }],
         outcomeMeasures: ["DASH", "SPADI"],
         highly: ["Therapeutic exercise", "Patient education"],
         moderately: ["Manual therapy", "Stretching"],
         notRec: ["Ultrasound", "Massage"],
-        patientEdu: "Frozen shoulder follows a predictable cycle. We focus on maintaining mobility during the high-pain inflammatory phase."
+        patientEdu: "We focus on maintaining mobility without provoking inflammation during the irritability phase."
       },
       {
         condition: "Anterior Cruciate Ligament", bodyRegion: "Knee", academy: "Orthopaedic",
-        redFlags: ["Inability to weight bear", "Hemarthrosis", "Neurovascular compromise"],
-        icd10: [
-            { code: "S83.511A", desc: "Right ACL Sprain, Initial" },
-            { code: "S83.512A", desc: "Left ACL Sprain, Initial" }
-        ], 
+        redFlags: ["Inability to weight bear", "Hemarthrosis"],
+        icd10: [{ code: "S83.511A", desc: "Right ACL Sprain, Initial" }, { code: "S83.512A", desc: "Left ACL Sprain, Initial" }],
+        broadCodes: [{ code: "M25.56", desc: "Pain in Knee" }, { code: "M23.5", desc: "Chronic Instability of Knee" }, { code: "R26.89", desc: "Abnormalities of Gait" }],
         outcomeMeasures: ["IKDC", "KOOS", "ACL-RSI"],
-        highly: ["Early weight bearing", "Neuromuscular electrical stimulation"],
+        highly: ["Early weight bearing", "NMES"],
         moderately: ["Manual therapy", "Neuromuscular reeducation"],
         notRec: ["Continuous passive motion"],
-        patientEdu: "Rehab focuses on restoring stability and quad strength to protect your knee during high-level movement."
+        patientEdu: "Rehab focuses on restoring stability and quad strength to protect your knee."
       },
       {
         condition: "Benign Paroxysmal Positional Vertigo", bodyRegion: "Ear", academy: "Neurologic",
         redFlags: ["Cranial nerve deficits", "Vertical nystagmus", "Sudden hearing loss"],
-        icd10: [{ code: "H81.10", desc: "BPPV, Unspecified" }], 
+        icd10: [{ code: "H81.10", desc: "BPPV, Unspecified" }],
+        broadCodes: [{ code: "R42", desc: "Dizziness and Vertigo" }, { code: "R26.81", desc: "Unsteadiness on Feet" }],
         outcomeMeasures: ["DHI", "DGI"],
         highly: ["Canalith repositioning maneuvers"],
         moderately: ["Vestibular habituation exercises"],
-        notRec: ["Prolonged avoidance of provoking positions"],
-        patientEdu: "Tiny crystals in your inner ear have moved out of place. Specific head maneuvers can guide them back."
+        notRec: ["Prolonged avoidance of positions"],
+        patientEdu: "Specific head maneuvers guide tiny inner-ear crystals back to their correct position."
       },
       {
         condition: "Carpal Tunnel Syndrome", bodyRegion: "Wrist and Hand", academy: "Orthopaedic",
         redFlags: ["Thenar atrophy", "Severe night pain"],
-        icd10: [
-            { code: "G56.01", desc: "Carpal Tunnel Syndrome, Right" },
-            { code: "G56.02", desc: "Carpal Tunnel Syndrome, Left" }
-        ], 
+        icd10: [{ code: "G56.01", desc: "Right Carpal Tunnel" }, { code: "G56.02", desc: "Left Carpal Tunnel" }],
+        broadCodes: [{ code: "M25.53", desc: "Pain in Wrist" }, { code: "G56.9", desc: "Upper Limb Mononeuropathy" }],
         outcomeMeasures: ["CTSQ", "DASH"],
         highly: ["Neutral wrist night splinting"],
         moderately: ["Manual therapy", "Ergonomic education"],
         notRec: ["Low-level laser therapy", "Thermal ultrasound"],
-        patientEdu: "Splinting at night keeps the nerve in a neutral position to reduce compression while you sleep."
+        patientEdu: "Night splinting reduces pressure on the median nerve while you sleep."
       },
       {
         condition: "Cervical Radiculopathy", bodyRegion: "Spine", academy: "Orthopaedic",
         redFlags: ["Myelopathy signs (Hoffmann's)", "Progressive weakness", "Drop attacks"],
-        icd10: [{ code: "M54.12", desc: "Radiculopathy, Cervical Region" }], 
+        icd10: [{ code: "M54.12", desc: "Cervical Radiculopathy" }],
+        broadCodes: [{ code: "M54.2", desc: "Cervicalgia (Neck Pain)" }, { code: "M62.830", desc: "Muscle Spasm of Back (Cervical)" }],
         outcomeMeasures: ["NDI", "PSFS"],
         highly: ["Manual therapy", "Cervical traction", "Deep neck flexor strengthening"],
         moderately: ["Nerve mobilization"],
         notRec: ["Prolonged cervical collar use"],
-        patientEdu: "Gentle movements and traction help create space and reduce nerve sensitivity in the neck."
+        patientEdu: "Gentle movements and traction create space and reduce nerve sensitivity in the neck."
       },
       {
         condition: "Concussion", bodyRegion: "Head", academy: "Neurologic",
         redFlags: ["Worsening headache", "Repeated vomiting", "Seizures"],
-        icd10: [{ code: "S06.0X0A", desc: "Concussion without Loss of Consciousness" }], 
+        icd10: [{ code: "S06.0X0A", desc: "Concussion without Loss of Consciousness" }],
+        broadCodes: [{ code: "R42", desc: "Dizziness and Giddiness" }, { code: "R41.841", desc: "Cognitive Communication Deficit" }],
         outcomeMeasures: ["PCSS", "VOMS", "BESS"],
         highly: ["Manual therapy", "Vestibular rehabilitation"],
         moderately: ["Graded exertion", "Ocular exercises"],
         notRec: ["Prolonged strict rest"],
-        patientEdu: "A gradual, monitored return to activity is the best way to recover from a functional brain injury."
+        patientEdu: "A monitored return to activity is the best way to recover from a functional brain injury."
       },
       {
         condition: "Congenital Muscular Torticollis", bodyRegion: "Neck", academy: "Pediatric",
         redFlags: ["Late onset (after 6 mo)", "Abnormal muscle tone"],
-        icd10: [{ code: "M43.6", desc: "Torticollis, Unspecified" }], 
+        icd10: [{ code: "M43.6", desc: "Torticollis, Unspecified" }],
+        broadCodes: [{ code: "M62.40", desc: "Contracture of Muscle, Unspecified" }, { code: "R29.3", desc: "Abnormal Posture" }],
         outcomeMeasures: ["AIMS", "TIMP"],
         highly: ["Passive cervical stretching", "Active positioning"],
         moderately: ["Handling education"],
         notRec: ["Botulinum toxin"],
-        patientEdu: "Stretching and positioning the baby during play will help restore full range of motion."
+        patientEdu: "Stretching and positioning during play restoration help restoring range of motion."
       },
       {
         condition: "De Quervain Tenosynovitis", bodyRegion: "Wrist and Hand", academy: "Orthopaedic",
         redFlags: ["Infection signs", "Severe focal swelling"],
-        icd10: [{ code: "M65.4", desc: "Radial Styloid Tenosynovitis" }], 
+        icd10: [{ code: "M65.4", desc: "Radial Styloid Tenosynovitis" }],
+        broadCodes: [{ code: "M25.53", desc: "Pain in Wrist" }, { code: "M79.64", desc: "Pain in Hand/Fingers" }],
         outcomeMeasures: ["DASH"],
         highly: ["Thumb spica splinting", "Lifting mechanics education"],
         moderately: ["Manual therapy", "Eccentric strengthening"],
         notRec: ["Aggressive stretching in acute phase"],
-        patientEdu: "We use splinting and modified techniques to allow the thumb-side wrist tendons to calm down."
+        patientEdu: "Splinting and technique modification allow thumb-side wrist tendons to recover."
       },
       {
         condition: "Falls Prevention", bodyRegion: "Systemic", academy: "Geriatric",
         redFlags: ["Unexplained blackouts", "Cardiac arrhythmia"],
-        icd10: [{ code: "Z91.81", desc: "History of Falling" }], 
+        icd10: [{ code: "Z91.81", desc: "History of Falling" }],
+        broadCodes: [{ code: "R26.2", desc: "Difficulty in Walking" }, { code: "R26.81", desc: "Unsteadiness on Feet" }],
         outcomeMeasures: ["TUG", "Berg Balance", "STEADI"],
         highly: ["Balance training", "Strength training"],
         moderately: ["Environmental hazard assessment"],
         notRec: ["General exercise"],
-        patientEdu: "We'll focus on improving your balance and strength to keep you steady and safe at home."
+        patientEdu: "We'll build balance and strength to keep you safe and independent."
       },
       {
         condition: "Fibromyalgia", bodyRegion: "Systemic", academy: "Orthopaedic",
         redFlags: ["Unexplained weight loss", "Widespread joint swelling"],
-        icd10: [{ code: "M79.7", desc: "Fibromyalgia" }], 
+        icd10: [{ code: "M79.7", desc: "Fibromyalgia" }],
+        broadCodes: [{ code: "M79.1", desc: "Myalgia" }, { code: "R53.83", desc: "Other Fatigue" }],
         outcomeMeasures: ["FIQ", "PROMIS"],
         highly: ["Low-impact aerobic exercise", "Aquatic therapy"],
         moderately: ["Manual therapy", "Strength training", "CBT"],
         notRec: ["High-intensity resistance training initially"],
-        patientEdu: "Gentle, consistent movement helps 'lower the volume' of pain signals in the nervous system."
+        patientEdu: "Consistent, gentle movement helps 'lower the volume' of pain signals."
       },
       {
         condition: "Hip Osteoarthritis", bodyRegion: "Hip", academy: "Orthopaedic",
         redFlags: ["Unexplained weight loss", "Pain worse at night"],
-        icd10: [
-            { code: "M16.11", desc: "Primary OA, Right Hip" },
-            { code: "M16.12", desc: "Primary OA, Left Hip" }
-        ], 
+        icd10: [{ code: "M16.11", desc: "Primary OA, Right Hip" }, { code: "M16.12", desc: "Primary OA, Left Hip" }],
+        broadCodes: [{ code: "M25.55", desc: "Pain in Hip" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["HOOS", "LEFS", "WOMAC"],
         highly: ["Manual therapy", "Therapeutic exercise"],
         moderately: ["Dry needling", "Patient education"],
         notRec: ["TENS"],
-        patientEdu: "Manual therapy and specific exercises can reduce stiffness and improve your function significantly."
+        patientEdu: "Manual therapy and exercise reduce stiffness and significantly improve function."
       },
       {
         condition: "Iliotibial Band Syndrome", bodyRegion: "Knee", academy: "Orthopaedic",
         redFlags: ["Night pain", "Locking/Catching"],
-        icd10: [
-            { code: "M76.31", desc: "ITB Syndrome, Right" },
-            { code: "M76.32", desc: "ITB Syndrome, Left" }
-        ], 
+        icd10: [{ code: "M76.31", desc: "ITB Syndrome, Right" }, { code: "M76.32", desc: "ITB Syndrome, Left" }],
+        broadCodes: [{ code: "M25.56", desc: "Pain in Knee" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["LEFS"],
         highly: ["Hip abductor strengthening", "Activity modification"],
         moderately: ["Manual therapy", "Foam rolling"],
         notRec: ["Aggressive IT band stretching"],
-        patientEdu: "Strengthening your hips will take the pressure off the outside of your knee."
+        patientEdu: "Strengthening your hips takes the pressure off the outside of your knee."
       },
       {
         condition: "Lateral Epicondylalgia", bodyRegion: "Elbow", academy: "Orthopaedic",
         redFlags: ["Radial nerve palsy", "Infection"],
-        icd10: [
-            { code: "M77.11", desc: "Lateral Epicondylitis, Right" },
-            { code: "M77.12", desc: "Lateral Epicondylitis, Left" }
-        ], 
+        icd10: [{ code: "M77.11", desc: "Right Lateral Epicondylitis" }, { code: "M77.12", desc: "Left Lateral Epicondylitis" }],
+        broadCodes: [{ code: "M25.52", desc: "Pain in Elbow" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["PRTEE", "DASH"],
         highly: ["Manual therapy", "Eccentric wrist extensor strengthening"],
         moderately: ["Taping", "Bracing"],
         notRec: ["Long-term corticosteroid reliance"],
-        patientEdu: "We'll use manual therapy and loading exercises to rebuild the elbow tendon's strength."
+        patientEdu: "Loading exercises rebuild the elbow tendon's strength and capacity."
       },
       {
         condition: "Low Back Pain", bodyRegion: "Spine", academy: "Orthopaedic",
         redFlags: ["Saddle anesthesia", "Bowel/bladder changes"],
-        icd10: [{ code: "M54.50", desc: "Low Back Pain, Unspecified" }], 
+        icd10: [{ code: "M54.50", desc: "Low Back Pain, Unspecified" }],
+        broadCodes: [{ code: "M54.40", desc: "Lumbago with Sciatica" }, { code: "M62.830", desc: "Muscle Spasm of Back" }],
         outcomeMeasures: ["ODI", "Roland-Morris"],
         highly: ["Manual therapy", "Trunk coordination"],
         moderately: ["Directional preference exercise"],
         notRec: ["Prolonged bed rest", "Passive modalities"],
-        patientEdu: "Staying active and moving into comfortable directions is the best way to get back to your life."
+        patientEdu: "Moving into comfortable directions is the fastest way to get back to normal life."
       },
       {
         condition: "Lumbar Radiculopathy", bodyRegion: "Spine", academy: "Orthopaedic",
         redFlags: ["Cauda Equina symptoms", "Progressive motor loss"],
-        icd10: [
-            { code: "M54.16", desc: "Radiculopathy, Lumbar" },
-            { code: "M54.17", desc: "Radiculopathy, Lumbosacral" }
-        ], 
+        icd10: [{ code: "M54.16", desc: "Radiculopathy, Lumbar" }, { code: "M54.17", desc: "Radiculopathy, Lumbosacral" }],
+        broadCodes: [{ code: "M54.50", desc: "Low Back Pain" }, { code: "M51.16", desc: "Lumbar Disc Disord. with Radiculopathy" }],
         outcomeMeasures: ["ODI"],
         highly: ["Directional preference exercise", "Nerve mobilization"],
         moderately: ["Manual therapy", "Trunk stabilization"],
         notRec: ["Prolonged bed rest"],
-        patientEdu: "We'll find movements that 'centralize' the pain and reduce leg symptoms caused by nerve irritation."
+        patientEdu: "Movements that 'centralize' the pain help reduce symptoms caused by nerve irritation."
       },
       {
         condition: "Lumbar Spinal Stenosis", bodyRegion: "Spine", academy: "Orthopaedic",
         redFlags: ["Neurogenic claudication", "Urinary retention"],
-        icd10: [{ code: "M48.061", desc: "Spinal Stenosis, Lumbar" }], 
+        icd10: [{ code: "M48.061", desc: "Spinal Stenosis, Lumbar" }],
+        broadCodes: [{ code: "R26.2", desc: "Difficulty in Walking" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["Swiss Spinal Stenosis Scale"],
         highly: ["Flexion-based exercises", "Aerobic conditioning"],
         moderately: ["Manual therapy", "Progressive walking"],
         notRec: ["Extension-based exercises"],
-        patientEdu: "Flexing forward often provides relief. We'll focus on exercises that keep you mobile in comfortable positions."
+        patientEdu: "We'll focus on exercises that keep you mobile in comfortable, flexion-based positions."
       },
       {
         condition: "Multiple Sclerosis", bodyRegion: "Brain", academy: "Neurologic",
         redFlags: ["Rapid vision loss", "Severe ataxia"],
-        icd10: [{ code: "G35", desc: "Multiple Sclerosis" }], 
+        icd10: [{ code: "G35", desc: "Multiple Sclerosis" }],
+        broadCodes: [{ code: "M62.81", desc: "Muscle Weakness" }, { code: "R26.89", desc: "Other Abnormalities of Gait" }],
         outcomeMeasures: ["MSWS-12", "FSS"],
         highly: ["Aerobic exercise", "Resistance training"],
         moderately: ["Aquatic therapy", "Balance training"],
         notRec: ["Exercise during acute exacerbations"],
-        patientEdu: "Exercise is vital for managing MS, improving strength, mood, and fatigue levels."
+        patientEdu: "Consistent exercise improves strength, fatigue levels, and overall quality of life."
       },
       {
         condition: "Neck Pain", bodyRegion: "Spine", academy: "Orthopaedic",
         redFlags: ["VBI symptoms", "Myelopathy"],
-        icd10: [{ code: "M54.2", desc: "Cervicalgia (Neck Pain)" }], 
+        icd10: [{ code: "M54.2", desc: "Cervicalgia (Neck Pain)" }],
+        broadCodes: [{ code: "M62.830", desc: "Muscle Spasm (Cervical)" }, { code: "M99.01", desc: "Segmental Dysf. of Cervical" }],
         outcomeMeasures: ["NDI", "PSFS"],
         highly: ["Manual therapy", "Strengthening"],
         moderately: ["Traction", "Coordination exercises"],
         notRec: ["Prolonged cervical collar use"],
-        patientEdu: "Manual therapy and targeted exercises help restore comfort and range of motion to your neck."
+        patientEdu: "Manual therapy and exercises restore comfort and mobility to your neck."
       },
       {
         condition: "Osteoporosis", bodyRegion: "Systemic", academy: "Geriatric",
         redFlags: ["Sudden back pain (Compression fracture)"],
-        icd10: [{ code: "M81.0", desc: "Age-related Osteoporosis" }], 
+        icd10: [{ code: "M81.0", desc: "Age-related Osteoporosis" }],
+        broadCodes: [{ code: "M62.81", desc: "Muscle Weakness" }, { code: "R26.81", desc: "Unsteadiness on Feet" }],
         outcomeMeasures: ["FALLS-Efficacy Scale"],
         highly: ["Weight-bearing aerobic exercise", "Progressive resistance training"],
         moderately: ["Balance training"],
         notRec: ["Manual therapy", "Spinal flexion exercises"],
-        patientEdu: "Strong bones need load. We'll focus on safe, weight-bearing exercises to build bone density."
+        patientEdu: "Weight-bearing exercises build bone density and balance prevents falls."
       },
       {
         condition: "Parkinson Disease", bodyRegion: "Brain", academy: "Neurologic",
         redFlags: ["Rapid cognitive decline", "Freezing of gait"],
-        icd10: [{ code: "G20.A1", desc: "Parkinson's Disease" }], 
+        icd10: [{ code: "G20.A1", desc: "Parkinson's Disease" }],
+        broadCodes: [{ code: "R26.89", desc: "Abnormalities of Gait" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["UPDRS", "Mini-BESTest"],
         highly: ["Aerobic exercise", "Task-specific training"],
         moderately: ["Balance training", "Cueing"],
         notRec: ["Passive range of motion"],
-        patientEdu: "High-intensity exercise and big movements help manage Parkinson's symptoms efficiently."
+        patientEdu: "High-intensity, large movements help manage Parkinson's symptoms efficiently."
       },
       {
         condition: "Patellofemoral Pain Syndrome", bodyRegion: "Knee", academy: "Orthopaedic",
         redFlags: ["Patellar dislocation", "Severe swelling"],
-        icd10: [
-            { code: "M22.2X1", desc: "Patellofemoral Disorder, Right" },
-            { code: "M22.2X2", desc: "Patellofemoral Disorder, Left" }
-        ], 
+        icd10: [{ code: "M22.2X1", desc: "Right Patellofemoral Disorder" }, { code: "M22.2X2", desc: "Left Patellofemoral Disorder" }],
+        broadCodes: [{ code: "M25.56", desc: "Pain in Knee" }, { code: "M62.81", desc: "Muscle Weakness (Hip/Knee)" }],
         outcomeMeasures: ["AKPS", "KOOS-PF"],
         highly: ["Hip and knee targeted exercises", "Foot orthoses"],
         moderately: ["Manual therapy", "Patellar taping"],
         notRec: ["Dry needling", "Isolated passive modalities"],
-        patientEdu: "Strengthening your hips and knees together is the best way to resolve patellofemoral pain."
+        patientEdu: "Strengthening hips and knees together resolves tracking and pain issues."
       },
       {
         condition: "Pelvic Floor Dysfunction", bodyRegion: "Pelvis", academy: "Pelvic Health",
-        redFlags: ["Unexplained hematuria", "Severe pelvic pain", "Malignancy signs"],
-        icd10: [
-            { code: "N39.3", desc: "Stress Incontinence" },
-            { code: "N39.41", desc: "Urge Incontinence" },
-            { code: "N39.46", desc: "Mixed Incontinence" },
-            { code: "N81.84", desc: "Pelvic Muscle Relaxation" }
-        ], 
+        redFlags: ["Unexplained hematuria", "Severe pelvic pain"],
+        icd10: [{ code: "N39.3", desc: "Stress Incontinence" }, { code: "N39.41", desc: "Urge Incontinence" }, { code: "N39.46", desc: "Mixed Incontinence" }],
+        broadCodes: [{ code: "R32", desc: "Urinary Incontinence, Unspecified" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["PFDI-20", "PISQ-12"],
         highly: ["Pelvic floor muscle training", "Biofeedback"],
         moderately: ["Manual therapy", "Behavioral modification"],
         notRec: ["Kegel exercises for hypertonic pelvic floor"],
-        patientEdu: "The pelvic floor needs a balance of strength and the ability to relax to function correctly."
+        patientEdu: "Balance in muscle coordination is key to pelvic health and control."
       },
       {
         condition: "Plantar Fasciitis", bodyRegion: "Foot and Ankle", academy: "Orthopaedic",
         redFlags: ["Focal bone tenderness", "Nocturnal pain"],
-        icd10: [{ code: "M72.2", desc: "Plantar Fascial Fibromatosis" }], 
+        icd10: [{ code: "M72.2", desc: "Plantar Fascial Fibromatosis" }],
+        broadCodes: [{ code: "M25.57", desc: "Pain in Foot" }, { code: "M67.87", desc: "Other Disord. of Synovium/Tendon (Foot)" }],
         outcomeMeasures: ["FAAM", "LEFS"],
         highly: ["Manual therapy", "Calf stretching"],
         moderately: ["Taping", "Custom orthoses"],
         notRec: ["Therapeutic ultrasound"],
-        patientEdu: "Stretching and manual therapy provide the best long-term relief for heel pain."
+        patientEdu: "Consistent stretching and manual therapy provide the best long-term heel pain relief."
       },
       {
         condition: "Rotator Cuff Repair", bodyRegion: "Shoulder", academy: "Orthopaedic",
         redFlags: ["Infection post-op", "Sudden loss of function"],
-        icd10: [{ code: "Z47.89", desc: "Aftercare, Post-Op" }], 
+        icd10: [{ code: "Z47.89", desc: "Aftercare following surgery" }],
+        broadCodes: [{ code: "M25.51", desc: "Pain in Shoulder" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["DASH", "ASES"],
         highly: ["Passive ROM", "Progressive loading", "Scapular stabilization"],
         moderately: ["Manual therapy", "Aquatic therapy"],
         notRec: ["Early aggressive active ROM", "Heavy lifting"],
-        patientEdu: "We protect the repair early with passive movement, then slowly build strength as it heals."
+        patientEdu: "Rehab protects the repair early and slowly builds strength as it heals."
       },
       {
         condition: "Stroke", bodyRegion: "Brain", academy: "Neurologic",
         redFlags: ["Sudden new deficit", "F.A.S.T. signs"],
-        icd10: [{ code: "I69.30", desc: "Sequelae of Stroke" }], 
+        icd10: [{ code: "I69.30", desc: "Sequelae of Stroke" }],
+        broadCodes: [{ code: "R26.89", desc: "Abnormalities of Gait" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["Fugl-Meyer", "10MWT"],
         highly: ["High-intensity gait training", "Task-specific training"],
         moderately: ["Virtual reality", "Mental practice"],
         notRec: ["Passive ROM as sole treatment"],
-        patientEdu: "High-intensity, repetitive practice of specific tasks is how we rebuild connections in the brain."
+        patientEdu: "High-intensity, repetitive practice helps the brain rebuild connections."
       },
       {
         condition: "Temporomandibular Joint Dysfunction", bodyRegion: "Head", academy: "Orthopaedic",
-        redFlags: ["Trigeminal neuralgia", "Difficulty swallowing"],
-        icd10: [{ code: "M26.60", desc: "TMJ Disorder, Unspecified" }], 
+        redFlags: ["Difficulty swallowing", "Locking jaw"],
+        icd10: [{ code: "M26.60", desc: "TMJ Disorder, Unspecified" }],
+        broadCodes: [{ code: "R51", desc: "Headache" }, { code: "M79.18", desc: "Myalgia, Head/Neck" }],
         outcomeMeasures: ["TMD Pain Screener"],
         highly: ["Manual therapy", "Postural education"],
         moderately: ["Dry needling", "Relaxation techniques"],
         notRec: ["Prolonged passive stretching"],
-        patientEdu: "Manual therapy and relaxation exercises help the jaw muscles work without pain."
+        patientEdu: "Manual therapy and relaxation techniques help jaw muscles work without pain."
       },
       {
         condition: "Thoracic Outlet Syndrome", bodyRegion: "Shoulder", academy: "Orthopaedic",
         redFlags: ["Cool/Pale limb", "Atrophy"],
-        icd10: [{ code: "G54.0", desc: "Brachial Plexus Lesion (TOS)" }], 
+        icd10: [{ code: "G54.0", desc: "Brachial Plexus Lesion (TOS)" }],
+        broadCodes: [{ code: "M25.51", desc: "Pain in Shoulder" }, { code: "G56.9", desc: "Upper Limb Mononeuropathy" }],
         outcomeMeasures: ["DASH"],
         highly: ["Postural correction", "Scalene stretching"],
         moderately: ["Manual therapy", "Nerve gliding"],
         notRec: ["Aggressive traction", "Heavy overhead lifting"],
-        patientEdu: "We'll use posture and stretching to 'open up' the space in your shoulder and reduce compression."
+        patientEdu: "Posture and stretching help 'open up' the space and reduce nerve compression."
       },
       {
         condition: "Total Hip Arthroplasty", bodyRegion: "Hip", academy: "Orthopaedic",
         redFlags: ["Signs of DVT/PE", "Dislocation signs"],
-        icd10: [
-            { code: "Z96.641", desc: "Artificial Right Hip Joint" },
-            { code: "Z96.642", desc: "Artificial Left Hip Joint" }
-        ], 
+        icd10: [{ code: "Z96.641", desc: "Presence of Artif. Right Hip" }, { code: "Z96.642", desc: "Presence of Artif. Left Hip" }],
+        broadCodes: [{ code: "R26.2", desc: "Difficulty in Walking" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["HOOS", "LEFS"],
         highly: ["Early mobilization", "Progressive resistance", "Gait training"],
         moderately: ["Manual therapy", "Stationary cycling"],
         notRec: ["High-impact activities early post-op"],
-        patientEdu: "We'll focus on strength and gait to ensure you get the most out of your new hip joint safely."
+        patientEdu: "Focusing on strength and gait ensures you get the most out of your new hip joint."
       },
       {
         condition: "Total Knee Arthroplasty", bodyRegion: "Knee", academy: "Orthopaedic",
         redFlags: ["Signs of DVT/PE", "Infection"],
-        icd10: [
-            { code: "Z96.651", desc: "Artificial Right Knee Joint" },
-            { code: "Z96.652", desc: "Artificial Left Knee Joint" }
-        ], 
+        icd10: [{ code: "Z96.651", desc: "Presence of Artif. Right Knee" }, { code: "Z96.652", desc: "Presence of Artif. Left Knee" }],
+        broadCodes: [{ code: "R26.2", desc: "Difficulty in Walking" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["KOOS", "LEFS"],
         highly: ["Early mobilization", "Knee ROM exercises", "Progressive strengthening"],
         moderately: ["Manual therapy", "NMES"],
         notRec: ["Continuous passive motion"],
-        patientEdu: "We'll focus on getting the knee straight and strong for your daily activities."
+        patientEdu: "We'll focus on getting the knee straight and strong for daily activities."
       },
       {
         condition: "Total Shoulder Arthroplasty", bodyRegion: "Shoulder", academy: "Orthopaedic",
         redFlags: ["Dislocation", "Nerve injury"],
-        icd10: [
-            { code: "Z96.611", desc: "Artificial Right Shoulder" },
-            { code: "Z96.612", desc: "Artificial Left Shoulder" }
-        ], 
+        icd10: [{ code: "Z96.611", desc: "Presence of Artif. Right Shoulder" }, { code: "Z96.612", desc: "Presence of Artif. Left Shoulder" }],
+        broadCodes: [{ code: "M25.51", desc: "Pain in Shoulder" }, { code: "M62.81", desc: "Muscle Weakness" }],
         outcomeMeasures: ["ASES", "DASH"],
         highly: ["Sling immobilization", "PROM", "Progressive deltoid strengthening"],
         moderately: ["Manual therapy", "Pulleys"],
         notRec: ["Forced ER stretching", "Early active IR"],
-        patientEdu: "Shoulder replacement rehab start slow with passive movement and build to active function."
+        patientEdu: "Rehab protects the new joint while restoring motion over several months."
       },
       {
         condition: "TIA", bodyRegion: "Brain", academy: "Neurologic",
         redFlags: ["Sudden new deficit", "F.A.S.T. signs"],
-        icd10: [{ code: "G45.9", desc: "TIA, Unspecified" }], 
+        icd10: [{ code: "G45.9", desc: "TIA, Unspecified" }],
+        broadCodes: [{ code: "R26.81", desc: "Unsteadiness on Feet" }, { code: "R53.83", desc: "Other Fatigue" }],
         outcomeMeasures: ["TUG", "Berg Balance"],
         highly: ["Aerobic conditioning", "Balance assessment"],
         moderately: ["Strength training"],
         notRec: ["High-intensity training without clearance"],
-        patientEdu: "We'll focus on aerobic exercise to improve your cardiovascular health and prevent future events."
+        patientEdu: "Aerobic exercise improves cardiovascular health and helps prevent future events."
       }
     ];
 
@@ -491,8 +480,11 @@
           <div class="info-grid">
             <div class="card">
               <h3>Documentation (Click to Copy)</h3>
+              <span class="code-label">Specific Codes</span>
               ${item.icd10 ? item.icd10.map(obj => `<span class="code-chip" data-desc="${obj.desc}" onclick="copyToClipboard('${obj.code}')">${obj.code}</span>`).join('') : 'N/A'}
-              <p style="font-size:0.7rem; margin-top:10px; color:gray">Hover code for desc. CPTs: 97110, 97140, 97112, 97116</p>
+              <span class="code-label" style="margin-top:10px">Broad/Category Codes</span>
+              ${item.broadCodes ? item.broadCodes.map(obj => `<span class="code-chip" style="background:#e3f2fd" data-desc="${obj.desc}" onclick="copyToClipboard('${obj.code}')">${obj.code}</span>`).join('') : 'N/A'}
+              <p style="font-size:0.7rem; margin-top:10px; color:gray">Hover for desc. CPTs: 97110, 97140, 97112, 97116</p>
             </div>
             <div class="card">
               <h3>Outcome Measures (PROMs)</h3>
